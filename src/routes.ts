@@ -7,6 +7,7 @@ import { Password } from "./entity/Password"
 const routes = Router()
 
 routes.get("/users", async (req, res) => {
+    const { connection } = res.locals
     /*
     const userRepository = getRepository(User)
     userRepository.save({ fistName: "Ax", lastName: "Sousa", age: 31 })
@@ -16,12 +17,12 @@ routes.get("/users", async (req, res) => {
     const category = new Category()
     category.description = "Bancos"
     category.user = usuario
-    await res.locals.connection.manager.save(category)
+    await connection.manager.save(category)
 
     const category2 = new Category()
     category2.description = "Serviços"
     category2.user = usuario
-    await res.locals.connection.manager.save(category2)
+    await connection.manager.save(category2)
 
     res.json(usuario)
     */
@@ -35,13 +36,13 @@ routes.get("/users", async (req, res) => {
     password.hash = "123"
     password.user = usuario
     password.category = category
-    await res.locals.connection.manager.save(password)
+    await connection.manager.save(password)
 
     const password2 = new Password()
     password2.hash = "546"
     password2.user = usuario
     password2.category = category
-    await res.locals.connection.manager.save(password2)
+    await connection.manager.save(password2)
     res.json(usuario)
 })
 
